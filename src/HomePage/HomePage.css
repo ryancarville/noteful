@@ -1,0 +1,11 @@
+.mainPage {
+	width: 100%;
+}
+
+#addNoteBTN {
+	width: 100px;
+	height: 25px;
+	margin-top: 20px;
+	margin-left: 200px;
+	cursor: pointer;
+}

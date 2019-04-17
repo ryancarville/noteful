@@ -1,0 +1,21 @@
+.notes {
+	list-style: none;
+	width: 60%;
+}
+
+.notes li {
+	height: 50px;
+	margin: 20px;
+	padding: 10px;
+	border: 1px solid black;
+	text-align: left;
+}
+
+.deleteNoteBTN {
+	float: right;
+	width: 100px;
+	height: 25px;
+	margin-top: -55px;
+	margin-right: 30px;
+	cursor: pointer;
+}
