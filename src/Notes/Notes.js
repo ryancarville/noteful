@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Notes.css';
-import store_p from '../STORE/STORE';
 
 class Notes extends Component {
 	render() {
-		const store = store_p.notes;
-		const notes = store.map((n, i) => {
+		const notes = this.props.notes.map((n, i) => {
 			return (
 				<>
 					<li key={n.id}>

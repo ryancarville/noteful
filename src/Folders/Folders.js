@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Notes from '../Notes/Notes';
 import './Folders.css';
 
 class Folders extends Component {
@@ -8,6 +9,7 @@ class Folders extends Component {
 	}
 	render() {
 		console.log(this.props.folders);
+		console.log(this.props.notes);
 
 		const folders = this.props.folders.map((f, i) => {
 			return (
@@ -18,12 +20,14 @@ class Folders extends Component {
 		});
 
 		return (
-			<div className='sideBar'>
-				<ul className='folders'>
-					{folders}
-					<button type='button'>Add Folder</button>
-				</ul>
-			</div>
+			<>
+				<div className='sideBar'>
+					<ul className='folders'>
+						{folders}
+						<button type='button'>Add Folder</button>
+					</ul>
+				</div>
+			</>
 		);
 	}
 }

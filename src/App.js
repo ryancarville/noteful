@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import HomePage from './HomePage/HomePage';
-import Folders from './Folders/Folders';
+import NotesInFolder from './NotesInFolder/NotesInFolder';
 import Notes from './Notes/Notes';
 import store from './STORE/STORE';
 
@@ -22,16 +22,34 @@ class App extends Component {
 				<Route
 					exact
 					path='/'
-					component={HomePage}
-					folders={this.state.folders}
-					notes={this.state.notes}
+					render={props => (
+						<HomePage
+							{...props}
+							folders={this.state.folders}
+							notes={this.state.notes}
+						/>
+					)}
 				/>
 				<Route
 					path='/folders'
-					component={Folders}
-					folders={this.state.folders}
+					render={props => (
+						<NotesInFolder
+							{...props}
+							folders={this.state.folders}
+							notes={this.state.notes}
+						/>
+					)}
 				/>
-				<Route path='/notes' component={Notes} notes={this.state.notes} />
+				<Route
+					path='/notes'
+					render={props => (
+						<Notes
+							{...props}
+							folders={this.state.folders}
+							notes={this.state.notes}
+						/>
+					)}
+				/>
 			</Switch>
 		);
 	}
