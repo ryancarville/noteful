@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import './Folders.css';
 
 class Folders extends Component {
+	constructor(props) {
+		super(props);
+	}
 	render() {
-		console.log('When ' + this.props.folders);
+		console.log(this.props.folders);
 
 		const folders = this.props.folders.map((f, i) => {
 			return (

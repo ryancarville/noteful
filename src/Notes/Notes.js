@@ -23,8 +23,10 @@ class Notes extends Component {
 			);
 		});
 		return (
-			<div className='Notes'>
-				<ul className='notes'>{notes}</ul>
+			<div className='mainPage'>
+				<div className='Notes'>
+					<ul className='notes'>{notes}</ul>
+				</div>
 			</div>
 		);
 	}
