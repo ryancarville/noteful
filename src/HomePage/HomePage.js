@@ -5,8 +5,6 @@ import './HomePage.css';
 
 class HomePage extends Component {
 	render() {
-		console.log(this.props.folders);
-		console.log(this.props.notes);
 		return (
 			<div className='stageWrap'>
 				<Folders folders={this.props.folders} />

@@ -6,7 +6,7 @@ class Notes extends Component {
 	render() {
 		const notes = this.props.notes.map((n, i) => {
 			return (
-				<>
+				<div key={i}>
 					<li key={n.id}>
 						<Link to={`/notes/:${n.id}`}>{n.name}</Link>
 						<br />
@@ -17,7 +17,7 @@ class Notes extends Component {
 					<button type='button' className='deleteNoteBTN'>
 						Delete Note
 					</button>
-				</>
+				</div>
 			);
 		});
 		return (

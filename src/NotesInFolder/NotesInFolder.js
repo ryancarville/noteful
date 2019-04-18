@@ -5,12 +5,11 @@ import '../Notes/Notes.css';
 
 class NotesInFolder extends Component {
 	render() {
-		console.log(this.props.match.params);
 		const folderId = this.props.match.params.undefined.substring(1);
 		const notes = this.props.notes.filter(note => note.folderId === folderId);
 		const note = notes.map((n, i) => {
 			return (
-				<>
+				<div key={i}>
 					<li key={n.id}>
 						<Link to={`/notes/:${n.id}`}>{n.name}</Link>
 						<br />
@@ -21,7 +20,7 @@ class NotesInFolder extends Component {
 					<button type='button' className='deleteNoteBTN'>
 						Delete Note
 					</button>
-				</>
+				</div>
 			);
 		});
 
