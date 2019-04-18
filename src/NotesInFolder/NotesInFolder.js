@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Folders from '../Folders/Folders';
+import '../Notes/Notes.css';
 
 class NotesInFolder extends Component {
 	render() {
-		const notes = this.props.notes.find((n, i) => {
+		console.log(this.props.match.params);
+		const folderId = this.props.match.params.undefined.substring(1);
+		const notes = this.props.notes.filter(note => note.folderId === folderId);
+		const note = notes.map((n, i) => {
 			return (
 				<>
 					<li key={n.id}>
-						{n.name}
+						<Link to={`/notes/:${n.id}`}>{n.name}</Link>
 						<br />
 						<br />
 						Date Modified: {n.modified}
@@ -19,10 +24,15 @@ class NotesInFolder extends Component {
 				</>
 			);
 		});
+
 		return (
-			<div>
+			<div className='stageWrap'>
 				<Folders folders={this.props.folders} />
-				Hello
+				<div className='mainPage'>
+					<div className='Notes'>
+						<ul className='notes'>{note}</ul>
+					</div>
+				</div>
 			</div>
 		);
 	}

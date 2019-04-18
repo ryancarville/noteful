@@ -3,7 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import HomePage from './HomePage/HomePage';
 import NotesInFolder from './NotesInFolder/NotesInFolder';
-import Notes from './Notes/Notes';
+
+import ShowNote from './ShowNote/ShowNote';
 import store from './STORE/STORE';
 
 import './App.css';
@@ -31,7 +32,7 @@ class App extends Component {
 					)}
 				/>
 				<Route
-					path='/folders'
+					path={`/folders/:${this.state.folders.id}`}
 					render={props => (
 						<NotesInFolder
 							{...props}
@@ -41,9 +42,9 @@ class App extends Component {
 					)}
 				/>
 				<Route
-					path='/notes'
+					path={`/notes/:${this.state.notes.id}`}
 					render={props => (
-						<Notes
+						<ShowNote
 							{...props}
 							folders={this.state.folders}
 							notes={this.state.notes}

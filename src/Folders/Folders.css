@@ -15,8 +15,8 @@
 	display: flex;
 	justify-content: center;
 	float: left;
-
-	height: 800px;
+	height: auto;
 	border-right: 1px solid black;
-	background-color: grey;
+	border-bottom: 1px solid black;
+	background-color: rgb(255, 255, 255);
 }

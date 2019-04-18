@@ -4,9 +4,6 @@ import Notes from '../Notes/Notes';
 import './HomePage.css';
 
 class HomePage extends Component {
-	constructor(props) {
-		super(props);
-	}
 	render() {
 		console.log(this.props.folders);
 		console.log(this.props.notes);

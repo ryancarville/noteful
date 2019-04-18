@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Notes from '../Notes/Notes';
+
 import './Folders.css';
 
 class Folders extends Component {
-	constructor(props) {
-		super(props);
-	}
 	render() {
-		console.log(this.props.folders);
-		console.log(this.props.notes);
-
 		const folders = this.props.folders.map((f, i) => {
 			return (
-				<Link to={`/folders/:${f.id}`}>
+				<Link to={`/folders/:${f.id}`} key={f.id}>
 					<li key={f.id}>{f.name}</li>
 				</Link>
 			);
