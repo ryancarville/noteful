@@ -18,34 +18,31 @@ class MyProvider extends Component {
 		Promise.all([
 			fetch(`${api_endpoint}/notes`),
 			fetch(`${api_endpoint}/folders`)
-		]);
-		if (!notesRes.ok) {
-			return notesRes.json().then(e => Promise.reject(e));
-		}
-		if (!foldersRes.ok) {
-			return foldersRes
-				.json()
-				.then(e => Promise.reject(e));
-		}
-		.then(res => Promise.all(res.map(r => r.json())))
-		.then(([notesRes, foldersRes]) => {
-			notesRes.then(notesRes => {
-				this.setState({
-					notes: notesRes,
-					error: null
+		])
+			.then(res => Promise.all(res.map(r => r.json())))
+			.then(([notesRes, foldersRes]) => {
+				if (!notesRes.ok) {
+					return notesRes.json().then(e => Promise.reject(e));
+				}
+				if (!foldersRes.ok) {
+					return foldersRes.json().then(e => Promise.reject(e));
+				}
+				notesRes.then(notesRes => {
+					this.setState({
+						notes: notesRes,
+						error: null
+					});
+					console.log(this.state);
 				});
-				console.log(this.state);
-			});
-		
-		foldersRes
-			.then(foldersRes => {
-				this.setState({
-					folders: foldersRes,
-					error: null
+
+				foldersRes.then(foldersRes => {
+					this.setState({
+						folders: foldersRes,
+						error: null
+					});
+					console.log(this.state);
 				});
-				console.log(this.state);
 			})
-		})
 			.catch(err => {
 				this.setState({
 					error: err.message
