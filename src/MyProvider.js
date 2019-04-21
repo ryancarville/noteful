@@ -11,53 +11,41 @@ class MyProvider extends Component {
 		console.log(this.state);
 	}
 
-	componentDidMount() {
-		const foldersURL = 'http://localhost:9090/folders';
-		const notesURL = 'http://localhost:9090/notes';
-		const options = {
-			method: 'GET'
-		};
-		//get folders
-		fetch(foldersURL, options)
-			.then(res => {
-				if (!res.ok) {
-					throw new Error('Something went wrong, please try again later.');
-				}
-				return res;
-			})
-			.then(res => res.json())
-			.then(foldersData => {
-				const folders = foldersData;
+	callAPIs() {
+		const api_endpoint = 'http://localhost:9090';
+
+		//get folders and notes
+		Promise.all([
+			fetch(`${api_endpoint}/notes`),
+			fetch(`${api_endpoint}/folders`)
+		]);
+		if (!notesRes.ok) {
+			return notesRes.json().then(e => Promise.reject(e));
+		}
+		if (!foldersRes.ok) {
+			return foldersRes
+				.json()
+				.then(e => Promise.reject(e));
+		}
+		.then(res => Promise.all(res.map(r => r.json())))
+		.then(([notesRes, foldersRes]) => {
+			notesRes.then(notesRes => {
 				this.setState({
-					folders: folders,
+					notes: notesRes,
 					error: null
 				});
 				console.log(this.state);
-			})
-			.catch(err => {
-				this.setState({
-					error: err.message
-				});
 			});
-
-		//get notes
-		fetch(notesURL, options)
-			.then(res => {
-				if (!res.ok) {
-					throw new Error('Something went wrong, please try again later.');
-				}
-				return res;
-			})
-			.then(res => res.json())
-			.then(notesData => {
-				const notes = notesData;
+		
+		foldersRes
+			.then(foldersRes => {
 				this.setState({
-					notes: notes,
+					folders: foldersRes,
 					error: null
 				});
 				console.log(this.state);
 			})
-
+		})
 			.catch(err => {
 				this.setState({
 					error: err.message
@@ -65,6 +53,10 @@ class MyProvider extends Component {
 			});
 	}
 
+	async componentDidMount() {
+		console.log(this.state);
+		await this.callAPIs();
+	}
 	render() {
 		return (
 			<MyContext.Provider value={{ state: this.state }}>
