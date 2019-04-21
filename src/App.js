@@ -3,58 +3,14 @@ import { Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import HomePage from './HomePage/HomePage';
 import NotesInFolder from './NotesInFolder/NotesInFolder';
-
+import { MyContext } from './MyProvider';
 import ShowNote from './ShowNote/ShowNote';
-import store from './STORE/STORE';
 
 import './App.css';
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			folders: store.folders,
-			notes: store.notes
-		};
-	}
-	routes() {
-		return (
-			<Switch>
-				<Route
-					exact
-					path='/'
-					render={props => (
-						<HomePage
-							{...props}
-							folders={this.state.folders}
-							notes={this.state.notes}
-						/>
-					)}
-				/>
-				<Route
-					path={`/folders/:${this.state.folders.id}`}
-					render={props => (
-						<NotesInFolder
-							{...props}
-							folders={this.state.folders}
-							notes={this.state.notes}
-						/>
-					)}
-				/>
-				<Route
-					path={`/notes/:${this.state.notes.id}`}
-					render={props => (
-						<ShowNote
-							{...props}
-							folders={this.state.folders}
-							notes={this.state.notes}
-						/>
-					)}
-				/>
-			</Switch>
-		);
-	}
 	render() {
+		console.log(this.context);
 		return (
 			<div className='App'>
 				<header className='header'>
@@ -62,7 +18,25 @@ class App extends Component {
 						<h4>Noteful</h4>
 					</Link>
 				</header>
-				<main>{this.routes()}</main>
+				<main>
+					<Switch>
+						<Route exact path='/' render={() => <HomePage />} />
+						<MyContext.Consumer>
+							{state => (
+								<Route
+									path={`/folders/:${state.folders.id}`}
+									render={() => <NotesInFolder />}
+								/>
+							)}
+							{state => (
+								<Route
+									path={`/notes/:${state.notes.id}`}
+									render={() => <ShowNote />}
+								/>
+							)}
+						</MyContext.Consumer>
+					</Switch>
+				</main>
 			</div>
 		);
 	}

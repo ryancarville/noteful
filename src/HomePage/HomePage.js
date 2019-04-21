@@ -7,8 +7,7 @@ class HomePage extends Component {
 	render() {
 		return (
 			<div className='stageWrap'>
-				<Folders folders={this.props.folders} />
-				<Notes notes={this.props.notes} />
+				<Folders /> <Notes />
 			</div>
 		);
 	}

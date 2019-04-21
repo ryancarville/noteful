@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Notes.css';
+import { MyContext } from '../MyProvider';
 
+console.log('notes');
 class Notes extends Component {
-	render() {
-		const notes = this.props.notes.map((n, i) => {
+	notes(notes) {
+		notes.map((n, i) => {
 			return (
 				<div key={i}>
 					<li key={n.id}>
@@ -20,10 +22,18 @@ class Notes extends Component {
 				</div>
 			);
 		});
+	}
+
+	render() {
+		console.log(this.context);
 		return (
 			<div className='mainPage'>
 				<div className='Notes'>
-					<ul className='notes'>{notes}</ul>
+					<MyContext.Consumer>
+						{context => (
+							<ul className='notes'>{this.notes(context.state.notes)}</ul>
+						)}
+					</MyContext.Consumer>
 				</div>
 			</div>
 		);
