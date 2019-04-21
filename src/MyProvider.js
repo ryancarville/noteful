@@ -11,37 +11,27 @@ class MyProvider extends Component {
 		console.log(this.state);
 	}
 
-	callAPIs() {
+	async callAPIs() {
 		const api_endpoint = 'http://localhost:9090';
 
 		//get folders and notes
-		Promise.all([
+		await Promise.all([
 			fetch(`${api_endpoint}/notes`),
 			fetch(`${api_endpoint}/folders`)
 		])
-			.then(res => Promise.all(res.map(r => r.json())))
 			.then(([notesRes, foldersRes]) => {
-				if (!notesRes.ok) {
-					return notesRes.json().then(e => Promise.reject(e));
-				}
-				if (!foldersRes.ok) {
+				if (!notesRes.ok) return notesRes.json().then(e => Promise.reject(e));
+				if (!foldersRes.ok)
 					return foldersRes.json().then(e => Promise.reject(e));
-				}
-				notesRes.then(notesRes => {
-					this.setState({
-						notes: notesRes,
-						error: null
-					});
-					console.log(this.state);
+				return Promise.all([notesRes.json(), foldersRes.json()]);
+			})
+			.then(([notes, folders]) => {
+				this.setState({
+					folders: folders,
+					notes: notes,
+					error: null
 				});
-
-				foldersRes.then(foldersRes => {
-					this.setState({
-						folders: foldersRes,
-						error: null
-					});
-					console.log(this.state);
-				});
+				console.log(this.state);
 			})
 			.catch(err => {
 				this.setState({
@@ -50,9 +40,9 @@ class MyProvider extends Component {
 			});
 	}
 
-	async componentDidMount() {
+	componentDidMount() {
 		console.log(this.state);
-		await this.callAPIs();
+		this.callAPIs();
 	}
 	render() {
 		return (
