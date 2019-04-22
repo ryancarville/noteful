@@ -7,7 +7,8 @@ class HomePage extends Component {
 	render() {
 		return (
 			<div className='stageWrap'>
-				<Folders /> <Notes />
+				<Folders />
+				<Notes />
 			</div>
 		);
 	}

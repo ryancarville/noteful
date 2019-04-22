@@ -22,15 +22,15 @@ class App extends Component {
 					<Switch>
 						<Route exact path='/' render={() => <HomePage />} />
 						<MyContext.Consumer>
-							{state => (
+							{context => (
 								<Route
-									path={`/folders/:${state.folders.id}`}
+									path={`/folders/:${context.state.folders.id}`}
 									render={() => <NotesInFolder />}
 								/>
 							)}
-							{state => (
+							{context => (
 								<Route
-									path={`/notes/:${state.notes.id}`}
+									path={`/notes/:${context.state.notes.id}`}
 									render={() => <ShowNote />}
 								/>
 							)}
