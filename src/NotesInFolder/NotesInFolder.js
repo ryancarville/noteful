@@ -27,7 +27,7 @@ class NotesInFolder extends Component {
 	}
 
 	render() {
-		const folderId = window.location.pathname.substring(10);
+		const folderId = window.location.pathname.substring(9);
 		console.log(folderId);
 		return (
 			<div className='stageWrap'>

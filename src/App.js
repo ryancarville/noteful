@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { MyContext } from './MyProvider';
 import HomePage from './HomePage/HomePage';
 import NotesInFolder from './NotesInFolder/NotesInFolder';
-import { MyContext } from './MyProvider';
 import ShowNote from './ShowNote/ShowNote';
 
 import './App.css';

@@ -22,7 +22,7 @@ class ShowNote extends Component {
 		);
 	}
 	render() {
-		const noteId = window.location.pathname.substring(8);
+		const noteId = window.location.pathname.substring(7);
 		console.log(noteId);
 		return (
 			<div className='stageWrap'>

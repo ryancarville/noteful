@@ -16,7 +16,7 @@ class Notes extends Component {
 									return (
 										<div key={i}>
 											<li key={n.id}>
-												<Link to={`/notes/:${n.id}`}>{n.name}</Link>
+												<Link to={`/notes/${n.id}`}>{n.name}</Link>
 												<br />
 												<br />
 												Date Modified: {n.modified}
