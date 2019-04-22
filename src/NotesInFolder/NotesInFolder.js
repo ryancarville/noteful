@@ -6,7 +6,7 @@ import { MyContext } from '../MyProvider';
 
 console.log('NotesInFolders ran');
 class NotesInFolder extends Component {
-	filterNotes(notes, folderId) {
+	filterNotes(notes, folderId, deleteNote) {
 		const notesFiltered = notes.filter(note => note.folderId === folderId);
 		console.log(notesFiltered);
 		return notesFiltered.map((n, i) => {
@@ -19,7 +19,10 @@ class NotesInFolder extends Component {
 						Date Modified: {n.modified}
 					</li>
 
-					<button type='button' className='deleteNoteBTN'>
+					<button
+						type='button'
+						className='deleteNoteBTN'
+						onClick={() => deleteNote(`${n.id}`)}>
 						Delete Note
 					</button>
 				</div>
@@ -36,7 +39,13 @@ class NotesInFolder extends Component {
 					<div className='Notes'>
 						<ul className='notes'>
 							<MyContext.Consumer>
-								{context => this.filterNotes(context.state.notes, folderId)}
+								{context =>
+									this.filterNotes(
+										context.state.notes,
+										folderId,
+										context.state.handelDelete
+									)
+								}
 							</MyContext.Consumer>
 						</ul>
 					</div>

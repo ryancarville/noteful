@@ -6,7 +6,20 @@ class MyProvider extends Component {
 		super(props);
 		this.state = {
 			folders: [],
-			notes: []
+			notes: [],
+			handelDelete: noteId => {
+				console.log(noteId);
+				const options = {
+					method: 'DELETE',
+					headers: {
+						'content-type': 'application/json'
+					}
+				};
+				fetch(`http://localhost:9090/notes/` + noteId, options).then(note => {
+					console.log(note);
+					this.callAPIs();
+				});
+			}
 		};
 		console.log(this.state);
 	}
