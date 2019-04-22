@@ -5,6 +5,14 @@ import { MyContext } from '../MyProvider';
 
 console.log('Notes ran');
 class Notes extends Component {
+	handelDelete(noteId) {
+		fetch(`https://localhost:9090/notes/` + noteId, {
+			method: 'DELETE',
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
+	}
 	render() {
 		return (
 			<div className='mainPage'>
@@ -21,8 +29,10 @@ class Notes extends Component {
 												<br />
 												Date Modified: {n.modified}
 											</li>
-
-											<button type='button' className='deleteNoteBTN'>
+											<button
+												type='button'
+												className='deleteNoteBTN'
+												onClick={this.handelDelete(`${n.id}`)}>
 												Delete Note
 											</button>
 										</div>

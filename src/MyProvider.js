@@ -6,7 +6,8 @@ class MyProvider extends Component {
 		super(props);
 		this.state = {
 			folders: [],
-			notes: []
+			notes: [],
+			deleteNote: () => {}
 		};
 		console.log(this.state);
 	}
