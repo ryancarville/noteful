@@ -7,7 +7,7 @@ class Folders extends Component {
 	render() {
 		const folders = this.props.folders.map((f, i) => {
 			return (
-				<Link to={`/folders/:${f.id}`} key={f.id}>
+				<Link to={`/folders/${f.id}`} key={f.id}>
 					<li key={f.id}>{f.name}</li>
 				</Link>
 			);

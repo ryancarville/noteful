@@ -15,7 +15,7 @@ class ShowNote extends Component {
 					<div className='Notes'>
 						<ul className='notes'>
 							<li key={note[0].id}>
-								<Link to={`/notes/:${note.id}`}>{note[0].name}</Link>
+								<Link to={`/notes/${note.id}`}>{note[0].name}</Link>
 								<br />
 								<p>{note[0].content}</p>
 								<br />
