@@ -5,28 +5,32 @@ import '../Notes/Notes.css';
 import { MyContext } from '../MyProvider';
 
 class NotesInFolder extends Component {
-	filterNotes(notes, folderId) {
-		notes
-			.filter(note => note.folderId === folderId)
-			.map((n, i) => {
-				return (
-					<div key={i}>
-						<li key={n.id}>
-							<Link to={`/notes/:${n.id}`}>{n.name}</Link>
-							<br />
-							<br />
-							Date Modified: {n.modified}
-						</li>
+	mapFilter(notes) {
+		notes.map((n, i) => {
+			return (
+				<div key={i}>
+					<li key={n.id}>
+						<Link to={`/notes/:${n.id}`}>{n.name}</Link>
+						<br />
+						<br />
+						Date Modified: {n.modified}
+					</li>
 
-						<button type='button' className='deleteNoteBTN'>
-							Delete Note
-						</button>
-					</div>
-				);
-			});
+					<button type='button' className='deleteNoteBTN'>
+						Delete Note
+					</button>
+				</div>
+			);
+		});
+	}
+
+	filterNotes(notes, folderId) {
+		const notesFiltered = notes.filter(note => note.folderId === folderId);
+		console.log(notesFiltered);
+		this.mapFilter(notesFiltered);
 	}
 	render() {
-		const folderId = 'working on this';
+		const folderId = window.location.pathname.substring(10);
 		console.log(folderId);
 		return (
 			<div className='stageWrap'>
@@ -35,7 +39,7 @@ class NotesInFolder extends Component {
 					<div className='Notes'>
 						<ul className='notes'>
 							<MyContext.Consumer>
-								{context => this.filterNotes(context.state.notes, { folderId })}
+								{context => this.filterNotes(context.state.notes, folderId)}
 							</MyContext.Consumer>
 						</ul>
 					</div>
