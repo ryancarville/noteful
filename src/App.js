@@ -8,9 +8,9 @@ import ShowNote from './ShowNote/ShowNote';
 
 import './App.css';
 
+console.log('App ran');
 class App extends Component {
 	render() {
-		console.log(this.context);
 		return (
 			<div className='App'>
 				<header className='header'>
