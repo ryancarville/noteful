@@ -20,12 +20,12 @@ class App extends Component {
 				</header>
 				<main>
 					<Switch>
-						<Route exact path='/' render={() => <HomePage />} />
+						<Route exact path='/' component={HomePage} />
 						<MyContext.Consumer>
 							{context => (
 								<Route
 									path={`/folders/:${context.state.folders.id}`}
-									render={() => <NotesInFolder />}
+									component={NotesInFolder}
 								/>
 							)}
 						</MyContext.Consumer>
@@ -33,7 +33,7 @@ class App extends Component {
 							{context => (
 								<Route
 									path={`/notes/:${context.state.notes.id}`}
-									render={() => <ShowNote />}
+									component={ShowNote}
 								/>
 							)}
 						</MyContext.Consumer>
