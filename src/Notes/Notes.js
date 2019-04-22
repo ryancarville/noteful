@@ -6,7 +6,8 @@ import { MyContext } from '../MyProvider';
 console.log('Notes ran');
 class Notes extends Component {
 	handelDelete(noteId) {
-		fetch(`https://localhost:9090/notes/` + noteId, {
+		console.log(noteId);
+		fetch(`http://localhost:9090/notes/` + noteId, {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json'
@@ -41,7 +42,6 @@ class Notes extends Component {
 							}
 						</MyContext.Consumer>
 					</ul>
-					)}
 				</div>
 			</div>
 		);
