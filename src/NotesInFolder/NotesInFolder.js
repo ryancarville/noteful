@@ -2,34 +2,42 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Folders from '../Folders/Folders';
 import '../Notes/Notes.css';
+import { MyContext } from '../MyProvider';
 
 class NotesInFolder extends Component {
+	filterNotes(notes, folderId) {
+		notes
+			.filter(note => note.folderId === folderId)
+			.map((n, i) => {
+				return (
+					<div key={i}>
+						<li key={n.id}>
+							<Link to={`/notes/:${n.id}`}>{n.name}</Link>
+							<br />
+							<br />
+							Date Modified: {n.modified}
+						</li>
+
+						<button type='button' className='deleteNoteBTN'>
+							Delete Note
+						</button>
+					</div>
+				);
+			});
+	}
 	render() {
-		const folderId = this.props.match.params.undefined.substring(1);
-		const notes = this.props.notes.filter(note => note.folderId === folderId);
-		const note = notes.map((n, i) => {
-			return (
-				<div key={i}>
-					<li key={n.id}>
-						<Link to={`/notes/:${n.id}`}>{n.name}</Link>
-						<br />
-						<br />
-						Date Modified: {n.modified}
-					</li>
-
-					<button type='button' className='deleteNoteBTN'>
-						Delete Note
-					</button>
-				</div>
-			);
-		});
-
+		const folderId = 'working on this';
+		console.log(folderId);
 		return (
 			<div className='stageWrap'>
-				<Folders folders={this.props.folders} />
+				<Folders />
 				<div className='mainPage'>
 					<div className='Notes'>
-						<ul className='notes'>{note}</ul>
+						<ul className='notes'>
+							<MyContext.Consumer>
+								{context => this.filterNotes(context.state.notes, { folderId })}
+							</MyContext.Consumer>
+						</ul>
 					</div>
 				</div>
 			</div>

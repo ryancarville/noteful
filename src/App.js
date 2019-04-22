@@ -28,6 +28,8 @@ class App extends Component {
 									render={() => <NotesInFolder />}
 								/>
 							)}
+						</MyContext.Consumer>
+						<MyContext.Consumer>
 							{context => (
 								<Route
 									path={`/notes/:${context.state.notes.id}`}
