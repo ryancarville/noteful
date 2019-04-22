@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Folders from '../Folders/Folders';
+
 import '../Notes/Notes.css';
 import { MyContext } from '../MyProvider';
 

@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
-import Folders from '../Folders/Folders';
+
 import '../Notes/Notes.css';
 import { MyContext } from '../MyProvider';
 
 console.log('ShowNote ran');
 class ShowNote extends Component {
 	displayNote(notes, noteId) {
-		const note = notes.filter(note => note.id === noteId);
-		console.log(note);
+		let note = notes.filter(note => note.id === noteId);
+		console.log(note[0]);
 		return (
 			<li key={note.id}>
-				<p>{note.name}</p>
+				<p>{note[0].name}</p>
 				<br />
-				<p>{note.content}</p>
+				<p>{note[0].content}</p>
 				<br />
-				Date Modified: {note.modified}
-				<button type='button' className='deleteNoteBTN'>
-					Delete Note
-				</button>
+				Date Modified: {note[0].modified}
 			</li>
 		);
 	}
@@ -32,6 +29,9 @@ class ShowNote extends Component {
 							<MyContext.Consumer>
 								{context => this.displayNote(context.state.notes, noteId)}
 							</MyContext.Consumer>
+							<button type='button' className='deleteNoteBTN'>
+								Delete Note
+							</button>
 						</ul>
 					</div>
 				</div>
