@@ -31,7 +31,6 @@ class NotesInFolder extends Component {
 		console.log(folderId);
 		return (
 			<div className='stageWrap'>
-				<Folders />
 				<div className='mainPage'>
 					<div className='Notes'>
 						<ul className='notes'>

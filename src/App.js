@@ -7,6 +7,7 @@ import NotesInFolder from './NotesInFolder/NotesInFolder';
 import ShowNote from './ShowNote/ShowNote';
 
 import './App.css';
+import Folders from './Folders/Folders';
 
 console.log('App ran');
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
 					</Link>
 				</header>
 				<main>
+					<Folders />
 					<Switch>
 						<Route exact path='/' component={HomePage} />
 						<MyContext.Consumer>

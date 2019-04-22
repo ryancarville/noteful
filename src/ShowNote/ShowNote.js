@@ -26,7 +26,6 @@ class ShowNote extends Component {
 		console.log(noteId);
 		return (
 			<div className='stageWrap'>
-				<Folders />
 				<div className='mainPage'>
 					<div className='Notes'>
 						<ul className='notes'>
