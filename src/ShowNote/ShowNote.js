@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Folders from '../Folders/Folders';
 import '../Notes/Notes.css';
+import { MyContext } from '../MyProvider';
 
+console.log('ShowNote ran');
 class ShowNote extends Component {
+	displayNote(notes, noteId) {
+		const note = notes.filter(note => note.id === noteId);
+		console.log(note);
+		return (
+			<li key={note.id}>
+				<p>{note.name}</p>
+				<br />
+				<p>{note.content}</p>
+				<br />
+				Date Modified: {note.modified}
+				<button type='button' className='deleteNoteBTN'>
+					Delete Note
+				</button>
+			</li>
+		);
+	}
 	render() {
-		const noteId = this.props.match.params.undefined.substring(1);
-		const note = this.props.notes.filter(note => note.id === noteId);
-
+		const noteId = window.location.pathname.substring(8);
+		console.log(noteId);
 		return (
 			<div className='stageWrap'>
-				<Folders folders={this.props.folders} />
+				<Folders />
 				<div className='mainPage'>
 					<div className='Notes'>
 						<ul className='notes'>
-							<li key={note[0].id}>
-								<Link to={`/notes/:${note.id}`}>{note[0].name}</Link>
-								<br />
-								<p>{note[0].content}</p>
-								<br />
-								Date Modified: {note[0].modified}
-							</li>
-							<button type='button' className='deleteNoteBTN'>
-								Delete Note
-							</button>
+							<MyContext.Consumer>
+								{context => this.displayNote(context.state.notes, noteId)}
+							</MyContext.Consumer>
 						</ul>
 					</div>
 				</div>

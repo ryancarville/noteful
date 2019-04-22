@@ -7,7 +7,7 @@ import { MyContext } from '../MyProvider';
 class NotesInFolder extends Component {
 	filterNotes(notes, folderId) {
 		const notesFiltered = notes.filter(note => note.folderId === folderId);
-
+		console.log(notesFiltered);
 		return notesFiltered.map((n, i) => {
 			return (
 				<div key={i}>
