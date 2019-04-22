@@ -7,13 +7,15 @@ console.log('Notes ran');
 class Notes extends Component {
 	handelDelete(noteId) {
 		console.log(noteId);
-		fetch(`http://localhost:9090/notes/` + noteId, {
+		const options = {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json'
 			}
-		});
+		};
+		fetch(`http://localhost:9090/notes/` + noteId, options);
 	}
+
 	render() {
 		return (
 			<div className='mainPage'>

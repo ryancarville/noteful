@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../Notes/Notes.css';
 import { MyContext } from '../MyProvider';
 
+console.log('NotesInFolders ran');
 class NotesInFolder extends Component {
 	filterNotes(notes, folderId) {
 		const notesFiltered = notes.filter(note => note.folderId === folderId);

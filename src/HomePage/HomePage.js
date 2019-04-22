@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Notes from '../Notes/Notes';
 import './HomePage.css';
 
+console.log('HomePage ran');
 class HomePage extends Component {
 	render() {
 		return (
