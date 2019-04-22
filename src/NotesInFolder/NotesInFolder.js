@@ -5,8 +5,10 @@ import '../Notes/Notes.css';
 import { MyContext } from '../MyProvider';
 
 class NotesInFolder extends Component {
-	mapFilter(notes) {
-		notes.map((n, i) => {
+	filterNotes(notes, folderId) {
+		const notesFiltered = notes.filter(note => note.folderId === folderId);
+
+		return notesFiltered.map((n, i) => {
 			return (
 				<div key={i}>
 					<li key={n.id}>
@@ -24,11 +26,6 @@ class NotesInFolder extends Component {
 		});
 	}
 
-	filterNotes(notes, folderId) {
-		const notesFiltered = notes.filter(note => note.folderId === folderId);
-		console.log(notesFiltered);
-		this.mapFilter(notesFiltered);
-	}
 	render() {
 		const folderId = window.location.pathname.substring(10);
 		console.log(folderId);
