@@ -95,6 +95,7 @@ export default class AddNote extends Component {
 								id='noteFolderIdInput'
 								className='formInput'
 								onChange={e => this.createNoteFolderId(e.target.value)}>
+								<option value=''>No Folder</option>
 								{context.state.folders.map((f, i) => {
 									return <option value={f.id}>{f.name}</option>;
 								})}
