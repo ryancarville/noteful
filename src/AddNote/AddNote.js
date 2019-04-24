@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { MyContext } from '../MyProvider';
-import { Link } from 'react-router-dom';
 import './AddNote.css';
 import ValidationError from '../ValidationError/ValidationError';
 
@@ -118,12 +117,21 @@ export default class AddNote extends Component {
 			fieldErrors.id = 'Id is required';
 			hasError = true;
 		} else {
-			if (fieldValue.length < 7) {
-				fieldErrors.id = 'Id must be at least 7 characters long';
+			if (fieldValue.length < 10) {
+				fieldErrors.id = 'Id must be at least 10 characters long';
 				hasError = true;
 			} else {
-				fieldErrors.id = '';
-				hasError = false;
+				if (
+					!fieldValue.match(
+						new RegExp(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/)
+					)
+				) {
+					fieldErrors.id = 'Id must contain at least one number and one letter';
+					hasError = true;
+				} else {
+					fieldErrors.id = '';
+					hasError = false;
+				}
 			}
 		}
 

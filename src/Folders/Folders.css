@@ -15,10 +15,11 @@
 
 .folders li:hover {
 	background-color: rgb(255, 255, 255);
-	color: lime;
+	color: rgb(0, 0, 0);
 }
 
 .sideBar {
+	width: 25%;
 	display: flex;
 	justify-content: center;
 	float: left;
@@ -50,4 +51,14 @@
 	background-color: aqua;
 	margin: 5px;
 	box-shadow: 2px 2px 0px;
+}
+
+#addFolderBtn:hover {
+	color: aqua;
+	background-color: black;
+}
+
+#addNoteBtn:hover {
+	color: aqua;
+	background-color: black;
 }

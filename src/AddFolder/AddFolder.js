@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MyContext } from '../MyProvider';
 import ValidationError from '../ValidationError/ValidationError';
-
+import './AddFolder.css';
 export default class AddFolder extends Component {
 	constructor(props) {
 		super(props);
@@ -104,44 +104,53 @@ export default class AddFolder extends Component {
 	render() {
 		const folderInfo = { id: this.state.id, name: this.state.name };
 		return (
-			<MyContext.Consumer>
-				{context => (
-					<form
-						id='addFolder'
-						onSubmit={() => context.state.AddFolder(folderInfo)}
-						action='/'>
-						<label htmlFor='folderId'>Folder Id: </label>
-						<input
-							type='text'
-							name='folderId'
-							id='folderIdInput'
-							className='formInput'
-							onChange={e => this.createFolderId(e.target.value)}
-						/>
-						<ValidationError
-							hasError={!this.state.idValid}
-							message={this.state.validationMessages.id}
-						/>
-						<br />
-						<label htmlFor='folderName'>Folder Name: </label>
-						<input
-							type='text'
-							id='folderName'
-							name='folderName'
-							className='formInput'
-							onChange={e => this.createFolderName(e.target.value)}
-						/>
-						<ValidationError
-							hasError={!this.state.nameValid}
-							message={this.state.validationMessages.name}
-						/>
-						<br />
-						<button type='submit' disabled={!this.state.formValid}>
-							Add Folder
-						</button>
-					</form>
-				)}
-			</MyContext.Consumer>
+			<div className='addFolderWrap'>
+				<MyContext.Consumer>
+					{context => (
+						<form
+							id='addFolder'
+							onSubmit={() => context.state.AddFolder(folderInfo)}
+							action='/'>
+							<label htmlFor='folderId'>Folder Id: </label>
+							<br />
+							<input
+								type='text'
+								name='folderId'
+								id='folderIdInput'
+								className='formInput'
+								onChange={e => this.createFolderId(e.target.value)}
+							/>
+							<br />
+							<ValidationError
+								hasError={!this.state.idValid}
+								message={this.state.validationMessages.id}
+							/>
+							<br />
+							<label htmlFor='folderName'>Folder Name: </label>
+							<br />
+							<input
+								type='text'
+								id='folderName'
+								name='folderName'
+								className='formInput'
+								onChange={e => this.createFolderName(e.target.value)}
+							/>
+							<br />
+							<ValidationError
+								hasError={!this.state.nameValid}
+								message={this.state.validationMessages.name}
+							/>
+							<br />
+							<button
+								type='submit'
+								id='addFolderSubmitBtn'
+								disabled={!this.state.formValid}>
+								Add Folder
+							</button>
+						</form>
+					)}
+				</MyContext.Consumer>
+			</div>
 		);
 	}
 }
