@@ -26,17 +26,33 @@ export default class AddNote extends Component {
 		});
 	}
 
-	createNoteModified(noteModified) {
-		this.setState({
-			modified: noteModified
-		});
+	createNoteModified() {
+		let dateMod = new Date();
+		let date =
+			dateMod.getFullYear() +
+			'-' +
+			(dateMod.getMonth() + 1) +
+			'-' +
+			dateMod.getDate() +
+			' ' +
+			dateMod.getHours() +
+			':' +
+			dateMod.getMinutes() +
+			':' +
+			dateMod.getSeconds();
+		const currDate = 'Date Modified: ' + date;
+		this.setState({ modified: currDate });
 	}
 
 	createNoteFolderId(noteFolderId) {
-		this.setState({
-			folderId: noteFolderId
-		});
-		console.log(this.state.folderId);
+		this.setState(
+			{
+				folderId: noteFolderId
+			},
+			() => {
+				console.log(this.state.folderId);
+			}
+		);
 	}
 
 	createNoteContent(noteContent) {
@@ -77,16 +93,6 @@ export default class AddNote extends Component {
 								onChange={e => this.createNoteName(e.target.value)}
 							/>
 							<br />
-							<label htmlFor='noteModified'>Note Modified: </label>
-							<br />
-							<input
-								type='text'
-								id='noteModifiedInput'
-								className='formInput'
-								name='noteModified'
-								onChange={e => this.createNoteModified(e.target.value)}
-							/>
-							<br />
 							<label htmlFor='folderId'>Folder: </label>
 							<br />
 							<select
@@ -97,7 +103,11 @@ export default class AddNote extends Component {
 								onChange={e => this.createNoteFolderId(e.target.value)}>
 								<option value=''>No Folder</option>
 								{context.state.folders.map((f, i) => {
-									return <option value={f.id}>{f.name}</option>;
+									return (
+										<option key={i} value={f.id}>
+											{f.name}
+										</option>
+									);
 								})}
 							</select>
 							<br />
@@ -108,11 +118,13 @@ export default class AddNote extends Component {
 								className='formInput'
 								name='noteBody'
 								onChange={e => this.createNoteContent(e.target.value)}
+								onPointerLeave={e => this.createNoteModified(e.target.value)}
 							/>
 							<br />
-							<Link to='/'>
-								<button type='submit'>Add Note</button>
-							</Link>
+
+							<button type='submit' id='addNoteBtn2'>
+								Add Note
+							</button>
 						</form>
 					)}
 				</MyContext.Consumer>

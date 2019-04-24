@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { MyContext } from '../MyProvider';
+import { Link } from 'react-router-dom';
 
 export default class AddFolder extends Component {
 	constructor(props) {
@@ -45,6 +46,7 @@ export default class AddFolder extends Component {
 							className='formInput'
 							onChange={e => this.createFolderName(e.target.value)}
 						/>
+
 						<button type='submit'>Add Folder</button>
 					</form>
 				)}

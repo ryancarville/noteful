@@ -10,9 +10,6 @@ class Notes extends Component {
 			<div className='mainPage'>
 				<div className='Notes'>
 					<ul className='notes'>
-						<Link to='/addNote'>
-							<button type='button'>Add Note</button>
-						</Link>
 						<MyContext.Consumer>
 							{context =>
 								context.state.notes.map((n, i) => {
