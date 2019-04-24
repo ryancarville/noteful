@@ -14,7 +14,7 @@ class Notes extends Component {
 							{context =>
 								context.state.notes.map((n, i) => {
 									return (
-										<div key={i}>
+										<>
 											<li key={n.id}>
 												<Link to={`/notes/${n.id}`}>{n.name}</Link>
 												<br />
@@ -23,13 +23,14 @@ class Notes extends Component {
 											</li>
 											<Link to='/'>
 												<button
+													key={i}
 													type='button'
 													className='deleteNoteBTN'
 													onClick={() => context.state.handelDelete(`${n.id}`)}>
 													Delete Note
 												</button>
 											</Link>
-										</div>
+										</>
 									);
 								})
 							}

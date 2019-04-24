@@ -20,17 +20,19 @@ class Folders extends Component {
 							})
 						}
 					</MyContext.Consumer>
+				</ul>
+				<div className='sideBarBtn'>
 					<Link to='/addFolder'>
-						<button type='button' id='addFolderBtn'>
+						<button type='button' id='addFolderBtn' className='sideBarBtn'>
 							+ Folder
 						</button>
 					</Link>
 					<Link to='/addNote'>
-						<button type='button' id='addNoteBtn'>
+						<button type='button' id='addNoteBtn' className='sideBarBtn'>
 							+ Note
 						</button>
 					</Link>
-				</ul>
+				</div>
 			</div>
 		);
 	}
