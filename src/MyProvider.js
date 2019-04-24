@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 export const MyContext = React.createContext();
 class MyProvider extends Component {
 	constructor(props) {
@@ -19,8 +18,36 @@ class MyProvider extends Component {
 					console.log(note);
 					this.callAPIs();
 				});
+			},
+
+			AddFolder: folderInfo => {
+				const options = {
+					method: 'POST',
+					body: JSON.stringify(folderInfo),
+					headers: {
+						'content-type': 'application/json'
+					}
+				};
+				fetch(`http://localhost:9090/folders/`, options).then(folderInfo => {
+					console.log(folderInfo);
+					this.callAPIs();
+				});
+			},
+			AddNote: noteInfo => {
+				const options = {
+					method: 'POST',
+					body: JSON.stringify(noteInfo),
+					headers: {
+						'content-type': 'application/json'
+					}
+				};
+				fetch(`http://localhost:9090/notes/`, options).then(noteInfo => {
+					console.log(noteInfo);
+					this.callAPIs();
+				});
 			}
 		};
+
 		console.log(this.state);
 	}
 

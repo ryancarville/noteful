@@ -7,6 +7,8 @@ import ShowNote from './ShowNote/ShowNote';
 
 import './App.css';
 import Folders from './Folders/Folders';
+import AddFolder from './AddFolder/AddFolder';
+import AddNote from './AddNote/AddNote';
 
 console.log('App ran');
 class App extends Component {
@@ -26,6 +28,10 @@ class App extends Component {
 						<Route path={`/folders`} component={NotesInFolder} />
 
 						<Route path={`/notes`} component={ShowNote} />
+
+						<Route path={`/addFolder`} component={AddFolder} />
+
+						<Route path={`/addNote`} component={AddNote} />
 					</Switch>
 				</main>
 			</div>

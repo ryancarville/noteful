@@ -10,6 +10,9 @@ class Notes extends Component {
 			<div className='mainPage'>
 				<div className='Notes'>
 					<ul className='notes'>
+						<Link to='/addNote'>
+							<button type='button'>Add Note</button>
+						</Link>
 						<MyContext.Consumer>
 							{context =>
 								context.state.notes.map((n, i) => {
@@ -21,12 +24,14 @@ class Notes extends Component {
 												<br />
 												Date Modified: {n.modified}
 											</li>
-											<button
-												type='button'
-												className='deleteNoteBTN'
-												onClick={() => context.state.handelDelete(`${n.id}`)}>
-												Delete Note
-											</button>
+											<Link to='/'>
+												<button
+													type='button'
+													className='deleteNoteBTN'
+													onClick={() => context.state.handelDelete(`${n.id}`)}>
+													Delete Note
+												</button>
+											</Link>
 										</div>
 									);
 								})

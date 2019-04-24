@@ -20,7 +20,9 @@ class Folders extends Component {
 							})
 						}
 					</MyContext.Consumer>
-					<button type='button'>Add Folder</button>
+					<Link to='/addFolder'>
+						<button type='button'>Add Folder</button>
+					</Link>
 				</ul>
 			</div>
 		);

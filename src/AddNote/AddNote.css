@@ -1,0 +1,13 @@
+.addNoteWrap {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding-top: 30px;
+	padding-left: 100px;
+}
+
+.formInput {
+	width: 300px;
+	height: 25px;
+	margin: 10px;
+}
