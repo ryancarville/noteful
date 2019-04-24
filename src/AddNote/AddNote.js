@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MyContext } from '../MyProvider';
 import { Link } from 'react-router-dom';
 import './AddNote.css';
-import HomePage from '../HomePage/HomePage';
+import ValidationError from '../ValidationError/ValidationError';
 
 export default class AddNote extends Component {
 	constructor(props) {
@@ -16,20 +16,23 @@ export default class AddNote extends Component {
 			idValid: false,
 			nameValid: false,
 			contentValid: false,
-			folderId: false,
 			formValid: false,
 			validationMessages: {
 				id: '',
 				name: '',
-				folderId: '',
 				content: ''
 			}
 		};
 	}
 	createNoteId(noteId) {
-		this.setState({
-			id: noteId
-		});
+		this.setState(
+			{
+				id: noteId
+			},
+			() => {
+				this.validateID(noteId);
+			}
+		);
 	}
 
 	createNoteName(noteName) {
@@ -62,20 +65,20 @@ export default class AddNote extends Component {
 	}
 
 	createNoteFolderId(noteFolderId) {
-		this.setState(
-			{
-				folderId: noteFolderId
-			},
-			() => {
-				console.log(this.state.folderId);
-			}
-		);
+		this.setState({
+			folderId: noteFolderId
+		});
 	}
 
 	createNoteContent(noteContent) {
-		this.setState({
-			content: noteContent
-		});
+		this.setState(
+			{
+				content: noteContent
+			},
+			() => {
+				this.validateContent(noteContent);
+			}
+		);
 	}
 
 	//validation
@@ -106,6 +109,67 @@ export default class AddNote extends Component {
 		);
 	}
 
+	validateID(fieldValue) {
+		const fieldErrors = { ...this.state.validationMessages };
+		let hasError = false;
+
+		fieldValue = fieldValue.trim();
+		if (fieldValue.length === 0) {
+			fieldErrors.id = 'Id is required';
+			hasError = true;
+		} else {
+			if (fieldValue.length < 7) {
+				fieldErrors.id = 'Id must be at least 7 characters long';
+				hasError = true;
+			} else {
+				fieldErrors.id = '';
+				hasError = false;
+			}
+		}
+
+		this.setState(
+			{
+				validationMessages: fieldErrors,
+				idValid: !hasError
+			},
+			this.formValid
+		);
+	}
+
+	validateContent(fieldValue) {
+		const fieldErrors = { ...this.state.validationMessages };
+		let hasError = false;
+
+		fieldValue = fieldValue.trim();
+		if (fieldValue.length === 0) {
+			fieldErrors.content = 'Content is required';
+			hasError = true;
+		} else {
+			if (fieldValue.length < 1) {
+				fieldErrors.content = 'Content must be at least 1 characters long';
+				hasError = true;
+			} else {
+				fieldErrors.content = '';
+				hasError = false;
+			}
+		}
+
+		this.setState(
+			{
+				validationMessages: fieldErrors,
+				contentValid: !hasError
+			},
+			this.formValid
+		);
+	}
+
+	formValid() {
+		this.setState({
+			formValid:
+				this.state.nameValid && this.state.idValid && this.state.contentValid
+		});
+	}
+
 	render() {
 		const noteInfo = {
 			id: this.state.id,
@@ -131,6 +195,10 @@ export default class AddNote extends Component {
 								name='noteId'
 								onChange={e => this.createNoteId(e.target.value)}
 							/>
+							<ValidationError
+								hasError={!this.state.idValid}
+								message={this.state.validationMessages.id}
+							/>
 							<br />
 							<label htmlFor='noteTitle'>Title: </label>
 							<br />
@@ -140,6 +208,10 @@ export default class AddNote extends Component {
 								className='formInput'
 								name='noteTitle'
 								onChange={e => this.createNoteName(e.target.value)}
+							/>
+							<ValidationError
+								hasError={!this.state.nameValid}
+								message={this.state.validationMessages.name}
 							/>
 							<br />
 							<label htmlFor='folderId'>Folder: </label>
@@ -168,12 +240,16 @@ export default class AddNote extends Component {
 								name='noteBody'
 								onChange={e => this.createNoteContent(e.target.value)}
 							/>
+							<ValidationError
+								hasError={!this.state.contentValid}
+								message={this.state.validationMessages.content}
+							/>
 							<br />
-
 							<button
 								type='submit'
 								id='addNoteSubmitBtn'
-								onClick={() => this.createNoteModified()}>
+								onClick={() => this.createNoteModified()}
+								disabled={!this.state.formValid}>
 								Add Note
 							</button>
 						</form>
