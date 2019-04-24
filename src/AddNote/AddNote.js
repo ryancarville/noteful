@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MyContext } from '../MyProvider';
 import { Link } from 'react-router-dom';
 import './AddNote.css';
+import HomePage from '../HomePage/HomePage';
 
 export default class AddNote extends Component {
 	constructor(props) {
@@ -11,7 +12,18 @@ export default class AddNote extends Component {
 			name: '',
 			modified: '',
 			folderId: '',
-			content: ''
+			content: '',
+			idValid: false,
+			nameValid: false,
+			contentValid: false,
+			folderId: false,
+			formValid: false,
+			validationMessages: {
+				id: '',
+				name: '',
+				folderId: '',
+				content: ''
+			}
 		};
 	}
 	createNoteId(noteId) {
@@ -21,9 +33,14 @@ export default class AddNote extends Component {
 	}
 
 	createNoteName(noteName) {
-		this.setState({
-			name: noteName
-		});
+		this.setState(
+			{
+				name: noteName
+			},
+			() => {
+				this.validateName(noteName);
+			}
+		);
 	}
 
 	createNoteModified() {
@@ -40,8 +57,8 @@ export default class AddNote extends Component {
 			dateMod.getMinutes() +
 			':' +
 			dateMod.getSeconds();
-		const currDate = 'Date Modified: ' + date;
-		this.setState({ modified: currDate });
+
+		this.setState({ modified: date });
 	}
 
 	createNoteFolderId(noteFolderId) {
@@ -60,6 +77,35 @@ export default class AddNote extends Component {
 			content: noteContent
 		});
 	}
+
+	//validation
+	validateName(fieldValue) {
+		const fieldErrors = { ...this.state.validationMessages };
+		let hasError = false;
+
+		fieldValue = fieldValue.trim();
+		if (fieldValue.length === 0) {
+			fieldErrors.name = 'Name is required';
+			hasError = true;
+		} else {
+			if (fieldValue.length < 3) {
+				fieldErrors.name = 'Name must be at least 3 characters long';
+				hasError = true;
+			} else {
+				fieldErrors.name = '';
+				hasError = false;
+			}
+		}
+
+		this.setState(
+			{
+				validationMessages: fieldErrors,
+				nameValid: !hasError
+			},
+			this.formValid
+		);
+	}
+
 	render() {
 		const noteInfo = {
 			id: this.state.id,
@@ -72,7 +118,10 @@ export default class AddNote extends Component {
 			<div className='addNoteWrap'>
 				<MyContext.Consumer>
 					{context => (
-						<form id='addNote' onSubmit={() => context.state.AddNote(noteInfo)}>
+						<form
+							id='addNote'
+							onSubmit={() => context.state.AddNote(noteInfo)}
+							action='/'>
 							<label htmlFor='noteId'>Note Id: </label>
 							<br />
 							<input
@@ -118,11 +167,13 @@ export default class AddNote extends Component {
 								className='formInput'
 								name='noteBody'
 								onChange={e => this.createNoteContent(e.target.value)}
-								onPointerLeave={e => this.createNoteModified(e.target.value)}
 							/>
 							<br />
 
-							<button type='submit' id='addNoteBtn2'>
+							<button
+								type='submit'
+								id='addNoteSubmitBtn'
+								onClick={() => this.createNoteModified()}>
 								Add Note
 							</button>
 						</form>

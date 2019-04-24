@@ -29,7 +29,8 @@ export default class AddFolder extends Component {
 				{context => (
 					<form
 						id='addFolder'
-						onSubmit={() => context.state.AddFolder(folderInfo)}>
+						onSubmit={() => context.state.AddFolder(folderInfo)}
+						action='/'>
 						<label htmlFor='folderId'>Folder Id: </label>
 						<input
 							type='text'

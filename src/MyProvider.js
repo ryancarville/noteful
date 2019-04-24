@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HomePage from './HomePage/HomePage';
 export const MyContext = React.createContext();
 class MyProvider extends Component {
 	constructor(props) {
