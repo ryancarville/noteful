@@ -103,8 +103,7 @@ export default class AddNote extends Component {
 							<br />
 							<label htmlFor='noteBody'>Note Content: </label>
 							<br />
-							<input
-								type='textarea'
+							<textarea
 								id='noteBodyInput'
 								className='formInput'
 								name='noteBody'
