@@ -28,7 +28,7 @@ export default class FilterNotes extends Component {
 								<button
 									type='button'
 									className='deleteNoteBTN'
-									onClick={() => context.state.deleteNote(`${n.id}`)}>
+									onClick={() => context.state.handelDelete(`${n.id}`)}>
 									Delete Note
 								</button>
 							</div>
