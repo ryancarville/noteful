@@ -15,7 +15,7 @@ export default class FilterNotes extends Component {
 						note => note.folderId === folderId
 					);
 					console.log(notesFiltered);
-					notesFiltered.map((n, i) => {
+					return notesFiltered.map((n, i) => {
 						return (
 							<div key={i}>
 								<li key={n.id}>
