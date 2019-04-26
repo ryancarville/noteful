@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { MyContext } from '../MyProvider';
 import ValidationError from '../ValidationError/ValidationError';
 import './AddFolder.css';
+import PropTypes from 'prop-types';
+
 export default class AddFolder extends Component {
 	constructor(props) {
 		super(props);
@@ -154,3 +156,7 @@ export default class AddFolder extends Component {
 		);
 	}
 }
+
+AddFolder.propTypes = {
+	value: PropTypes.string
+};

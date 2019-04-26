@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MyContext } from '../MyProvider';
 import './AddNote.css';
 import ValidationError from '../ValidationError/ValidationError';
+import PropTypes from 'prop-types';
 
 export default class AddNote extends Component {
 	constructor(props) {
@@ -267,3 +268,7 @@ export default class AddNote extends Component {
 		);
 	}
 }
+
+AddNote.propType = {
+	value: PropTypes.string
+};

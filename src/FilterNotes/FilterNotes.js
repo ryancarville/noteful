@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { MyContext } from '../MyProvider';
+import PropTypes from 'prop-types';
 
 export default class FilterNotes extends Component {
 	render() {
@@ -38,3 +39,7 @@ export default class FilterNotes extends Component {
 		);
 	}
 }
+
+FilterNotes.propTypes = {
+	value: PropTypes.array
+};

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { MyContext } from '../MyProvider';
+import PropTypes from 'prop-types';
 
 export default class DisplayNotes extends Component {
 	render() {
@@ -8,7 +9,6 @@ export default class DisplayNotes extends Component {
 			<MyContext.Consumer>
 				{context => {
 					const noteId = this.props.noteId;
-
 					const note = context.state.notes.filter(note => note.id === noteId);
 					console.log(note[0]);
 					return (
@@ -35,3 +35,7 @@ export default class DisplayNotes extends Component {
 		);
 	}
 }
+
+DisplayNotes.propTypes = {
+	value: PropTypes.array
+};

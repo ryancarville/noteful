@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Notes.css';
 import { MyContext } from '../MyProvider';
+import PropTypes from 'prop-types';
 
 console.log('Notes ran');
 class Notes extends Component {
@@ -16,12 +17,14 @@ class Notes extends Component {
 									return (
 										<>
 											<li key={n.id}>
-												<Link to={`/notes/${n.id}`}>{n.name}</Link>
+												<Link to={`/notes/${n.id}`} key={'link' + n.id}>
+													{n.name}
+												</Link>
 												<br />
 												<br />
 												Date Modified: {n.modified}
 											</li>
-											<Link to='/'>
+											<Link to='/' key={'Btnlink' + i}>
 												<button
 													key={i}
 													type='button'
@@ -42,3 +45,7 @@ class Notes extends Component {
 	}
 }
 export default Notes;
+
+Notes.propTypes = {
+	value: PropTypes.array
+};

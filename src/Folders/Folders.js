@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MyContext } from '../MyProvider';
 import { Link } from 'react-router-dom';
 import './Folders.css';
+import PropTypes from 'prop-types';
 
 console.log('Folders ran');
 class Folders extends Component {
@@ -39,3 +40,7 @@ class Folders extends Component {
 }
 
 export default Folders;
+
+Folders.propTypes = {
+	value: PropTypes.array
+};
