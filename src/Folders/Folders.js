@@ -6,17 +6,6 @@ import PropTypes from 'prop-types';
 
 class Folders extends Component {
 	render() {
-<<<<<<< HEAD
-		const folders = this.props.folders.map((f, i) => {
-			return (
-				<Link to={`/folders/${f.id}`} key={f.id}>
-					<li key={f.id}>{f.name}</li>
-				</Link>
-			);
-		});
-
-=======
->>>>>>> componentRefactor
 		return (
 			<div className='sideBar'>
 				<ul className='folders'>
