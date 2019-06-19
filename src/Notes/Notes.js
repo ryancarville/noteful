@@ -1,32 +1,50 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Notes.css';
+import { MyContext } from '../MyProvider';
+import PropTypes from 'prop-types';
 
 class Notes extends Component {
 	render() {
-		const notes = this.props.notes.map((n, i) => {
-			return (
-				<div key={i}>
-					<li key={n.id}>
-						<Link to={`/notes/:${n.id}`}>{n.name}</Link>
-						<br />
-						<br />
-						Date Modified: {n.modified}
-					</li>
-
-					<button type='button' className='deleteNoteBTN'>
-						Delete Note
-					</button>
-				</div>
-			);
-		});
 		return (
 			<div className='mainPage'>
 				<div className='Notes'>
-					<ul className='notes'>{notes}</ul>
+					<ul className='notes'>
+						<MyContext.Consumer>
+							{context =>
+								context.state.notes.map((n, i) => {
+									return (
+										<>
+											<li key={n.id}>
+												<Link to={`/notes/${n.id}`} key={'link' + n.id}>
+													{n.note_name}
+												</Link>
+												<br />
+												<br />
+												Date Modified: {n.date_mod}
+											</li>
+											<Link to='/' key={'Btnlink' + i}>
+												<button
+													key={i}
+													type='button'
+													className='deleteNoteBTN'
+													onClick={() => context.state.handelDelete(`${n.id}`)}>
+													Delete Note
+												</button>
+											</Link>
+										</>
+									);
+								})
+							}
+						</MyContext.Consumer>
+					</ul>
 				</div>
 			</div>
 		);
 	}
 }
 export default Notes;
+
+Notes.propTypes = {
+	value: PropTypes.array
+};

@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Folders from '../Folders/Folders';
 import '../Notes/Notes.css';
+import DisplayNotes from '../DisplayNotes/DisplayNotes';
 
 class ShowNote extends Component {
 	render() {
-		const noteId = this.props.match.params.undefined.substring(1);
-		const note = this.props.notes.filter(note => note.id === noteId);
-
+		const noteId = this.props.match.params.note_id;
 		return (
 			<div className='stageWrap'>
-				<Folders folders={this.props.folders} />
 				<div className='mainPage'>
 					<div className='Notes'>
 						<ul className='notes'>
+<<<<<<< HEAD
 							<li key={note[0].id}>
 								<Link to={`/notes/${note.id}`}>{note[0].name}</Link>
 								<br />
@@ -24,6 +21,9 @@ class ShowNote extends Component {
 							<button type='button' className='deleteNoteBTN'>
 								Delete Note
 							</button>
+=======
+							<DisplayNotes noteId={noteId} />
+>>>>>>> componentRefactor
 						</ul>
 					</div>
 				</div>

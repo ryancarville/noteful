@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Folders from '../Folders/Folders';
+
+import FilterNotes from '../FilterNotes/FilterNotes';
 import '../Notes/Notes.css';
 
 class NotesInFolder extends Component {
 	render() {
+<<<<<<< HEAD
 		const folderId = this.props.match.params.undefined.substring(1);
 		const notes = this.props.notes.filter(note => note.folderId === folderId);
 		const note = notes.map((n, i) => {
@@ -24,12 +25,16 @@ class NotesInFolder extends Component {
 			);
 		});
 
+=======
+		const folderId = this.props.match.params.folder_id;
+>>>>>>> componentRefactor
 		return (
 			<div className='stageWrap'>
-				<Folders folders={this.props.folders} />
 				<div className='mainPage'>
 					<div className='Notes'>
-						<ul className='notes'>{note}</ul>
+						<ul className='notes'>
+							<FilterNotes folderId={folderId} />
+						</ul>
 					</div>
 				</div>
 			</div>
