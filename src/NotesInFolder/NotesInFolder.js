@@ -6,7 +6,7 @@ import '../Notes/Notes.css';
 console.log('NotesInFolders ran');
 class NotesInFolder extends Component {
 	render() {
-		const folderId = window.location.pathname.substring(9);
+		const folderId = this.props.match.params.folder_id;
 		console.log(folderId);
 		return (
 			<div className='stageWrap'>

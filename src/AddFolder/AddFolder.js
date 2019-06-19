@@ -8,25 +8,12 @@ export default class AddFolder extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: '',
 			name: '',
-			idValid: false,
 			nameValid: false,
 			validationMessages: {
-				id: '',
 				name: ''
 			}
 		};
-	}
-	createFolderId(folderId) {
-		this.setState(
-			{
-				id: folderId
-			},
-			() => {
-				this.validateID(folderId);
-			}
-		);
 	}
 
 	createFolderName(folderName) {
@@ -70,41 +57,14 @@ export default class AddFolder extends Component {
 		);
 	}
 
-	validateID(fieldValue) {
-		const fieldErrors = { ...this.state.validationMessages };
-		let hasError = false;
-
-		fieldValue = fieldValue.trim();
-		if (fieldValue.length === 0) {
-			fieldErrors.id = 'Id is required';
-			hasError = true;
-		} else {
-			if (fieldValue.length < 7) {
-				fieldErrors.id = 'Id must be at least 7 characters long';
-				hasError = true;
-			} else {
-				fieldErrors.id = '';
-				hasError = false;
-			}
-		}
-
-		this.setState(
-			{
-				validationMessages: fieldErrors,
-				idValid: !hasError
-			},
-			this.formValid
-		);
-	}
-
 	formValid() {
 		this.setState({
-			formValid: this.state.nameValid && this.state.idValid
+			formValid: this.state.nameValid
 		});
 	}
 
 	render() {
-		const folderInfo = { id: this.state.id, name: this.state.name };
+		const folderInfo = { folder_name: this.state.name };
 		return (
 			<div className='addFolderWrap'>
 				<MyContext.Consumer>
@@ -113,21 +73,6 @@ export default class AddFolder extends Component {
 							id='addFolder'
 							onSubmit={() => context.state.AddFolder(folderInfo)}
 							action='/'>
-							<label htmlFor='folderId'>Folder Id: </label>
-							<br />
-							<input
-								type='text'
-								name='folderId'
-								id='folderIdInput'
-								className='formInput'
-								onChange={e => this.createFolderId(e.target.value)}
-							/>
-							<br />
-							<ValidationError
-								hasError={!this.state.idValid}
-								message={this.state.validationMessages.id}
-							/>
-							<br />
 							<label htmlFor='folderName'>Folder Name: </label>
 							<br />
 							<input

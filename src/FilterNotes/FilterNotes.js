@@ -5,15 +5,16 @@ import PropTypes from 'prop-types';
 
 export default class FilterNotes extends Component {
 	render() {
+		const folderId = this.props.folderId;
+		console.log(folderId);
 		return (
 			<MyContext.Consumer>
 				{context => {
 					const notes = context.state.notes;
 					console.log(notes);
-					const folderId = this.props.folderId;
-					console.log(folderId);
+
 					const notesFiltered = notes.filter(
-						note => note.folderId === folderId
+						note => note.folder_id == folderId
 					);
 					console.log(notesFiltered);
 					return notesFiltered.map((n, i) => {

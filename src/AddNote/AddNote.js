@@ -8,37 +8,24 @@ export default class AddNote extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: '',
-			name: '',
-			modified: '',
-			folderId: '',
+			note_name: '',
+			date_mod: '',
+			folder_id: 1,
 			content: '',
-			idValid: false,
 			nameValid: false,
 			contentValid: false,
 			formValid: false,
 			validationMessages: {
-				id: '',
-				name: '',
+				note_name: '',
 				content: ''
 			}
 		};
-	}
-	createNoteId(noteId) {
-		this.setState(
-			{
-				id: noteId
-			},
-			() => {
-				this.validateID(noteId);
-			}
-		);
 	}
 
 	createNoteName(noteName) {
 		this.setState(
 			{
-				name: noteName
+				note_name: noteName
 			},
 			() => {
 				this.validateName(noteName);
@@ -61,12 +48,12 @@ export default class AddNote extends Component {
 			':' +
 			dateMod.getSeconds();
 
-		this.setState({ modified: date });
+		this.setState({ date_mod: date });
 	}
 
 	createNoteFolderId(noteFolderId) {
 		this.setState({
-			folderId: noteFolderId
+			folder_id: noteFolderId
 		});
 	}
 
@@ -109,42 +96,6 @@ export default class AddNote extends Component {
 		);
 	}
 
-	validateID(fieldValue) {
-		const fieldErrors = { ...this.state.validationMessages };
-		let hasError = false;
-
-		fieldValue = fieldValue.trim();
-		if (fieldValue.length === 0) {
-			fieldErrors.id = 'Id is required';
-			hasError = true;
-		} else {
-			if (fieldValue.length < 10) {
-				fieldErrors.id = 'Id must be at least 10 characters long';
-				hasError = true;
-			} else {
-				if (
-					!fieldValue.match(
-						new RegExp(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/)
-					)
-				) {
-					fieldErrors.id = 'Id must contain at least one number and one letter';
-					hasError = true;
-				} else {
-					fieldErrors.id = '';
-					hasError = false;
-				}
-			}
-		}
-
-		this.setState(
-			{
-				validationMessages: fieldErrors,
-				idValid: !hasError
-			},
-			this.formValid
-		);
-	}
-
 	validateContent(fieldValue) {
 		const fieldErrors = { ...this.state.validationMessages };
 		let hasError = false;
@@ -174,17 +125,15 @@ export default class AddNote extends Component {
 
 	formValid() {
 		this.setState({
-			formValid:
-				this.state.nameValid && this.state.idValid && this.state.contentValid
+			formValid: this.state.nameValid && this.state.contentValid
 		});
 	}
 
 	render() {
 		const noteInfo = {
-			id: this.state.id,
-			name: this.state.name,
-			modified: this.state.modified,
-			folderId: this.state.folderId,
+			note_name: this.state.note_name,
+			date_mod: this.state.date_mod,
+			folder_id: this.state.folder_id,
 			content: this.state.content
 		};
 		return (
@@ -195,20 +144,6 @@ export default class AddNote extends Component {
 							id='addNote'
 							onSubmit={() => context.state.AddNote(noteInfo)}
 							action='/'>
-							<label htmlFor='noteId'>Note Id: </label>
-							<br />
-							<input
-								type='text'
-								id='noteIdInput'
-								className='formInput'
-								name='noteId'
-								onChange={e => this.createNoteId(e.target.value)}
-							/>
-							<ValidationError
-								hasError={!this.state.idValid}
-								message={this.state.validationMessages.id}
-							/>
-							<br />
 							<label htmlFor='noteTitle'>Title: </label>
 							<br />
 							<input
@@ -231,11 +166,10 @@ export default class AddNote extends Component {
 								id='noteFolderIdInput'
 								className='formInput'
 								onChange={e => this.createNoteFolderId(e.target.value)}>
-								<option value=''>No Folder</option>
 								{context.state.folders.map((f, i) => {
 									return (
 										<option key={i} value={f.id}>
-											{f.name}
+											{f.folder_name}
 										</option>
 									);
 								})}

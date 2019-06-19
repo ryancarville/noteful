@@ -11,7 +11,7 @@ export default class DisplayNotes extends Component {
 			<MyContext.Consumer>
 				{context => {
 					console.log(context.state.notes);
-					const note = context.state.notes.filter(note => note.id === noteId);
+					const note = context.state.notes.filter(note => note.id == noteId);
 					console.log(note);
 					return (
 						<>

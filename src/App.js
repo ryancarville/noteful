@@ -25,7 +25,7 @@ class App extends Component {
 					<Switch>
 						<Route exact path='/' component={HomePage} />
 
-						<Route path={`/folders`} component={NotesInFolder} />
+						<Route path='/folders/:folder_id' exact component={NotesInFolder} />
 
 						<Route path='/notes/:note_id' exact component={ShowNote} />
 

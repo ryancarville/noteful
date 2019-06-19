@@ -31,12 +31,10 @@ class MyProvider extends Component {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(`http://localhost:8000/api/folders/`, options).then(
-					folderInfo => {
-						console.log(folderInfo);
-						this.callAPIs();
-					}
-				);
+				fetch(`http://localhost:8000/api/folders`, options).then(folderInfo => {
+					console.log(folderInfo);
+					this.callAPIs();
+				});
 			},
 			AddNote: noteInfo => {
 				const options = {
