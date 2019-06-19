@@ -15,10 +15,12 @@ class MyProvider extends Component {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(`http://localhost:9090/notes/` + noteId, options).then(note => {
-					console.log(note);
-					this.callAPIs();
-				});
+				fetch(`http://localhost:8000/api/notes/` + noteId, options).then(
+					note => {
+						console.log(note);
+						this.callAPIs();
+					}
+				);
 			},
 
 			AddFolder: folderInfo => {
@@ -29,10 +31,12 @@ class MyProvider extends Component {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(`http://localhost:9090/folders/`, options).then(folderInfo => {
-					console.log(folderInfo);
-					this.callAPIs();
-				});
+				fetch(`http://localhost:8000/api/folders/`, options).then(
+					folderInfo => {
+						console.log(folderInfo);
+						this.callAPIs();
+					}
+				);
 			},
 			AddNote: noteInfo => {
 				const options = {
@@ -42,7 +46,7 @@ class MyProvider extends Component {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(`http://localhost:9090/notes/`, options).then(noteInfo => {
+				fetch(`http://localhost:8000/api/notes/`, options).then(noteInfo => {
 					console.log(noteInfo);
 					this.callAPIs();
 				});
@@ -53,7 +57,7 @@ class MyProvider extends Component {
 	}
 
 	async callAPIs() {
-		const api_endpoint = 'http://localhost:9090';
+		const api_endpoint = 'http://localhost:8000/api';
 		//get folders and notes
 		await Promise.all([
 			fetch(`${api_endpoint}/notes`),

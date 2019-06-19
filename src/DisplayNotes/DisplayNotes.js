@@ -14,11 +14,11 @@ export default class DisplayNotes extends Component {
 					return (
 						<>
 							<li key={note.id}>
-								<p>{note[0].name}</p>
+								<p>{note[0].note_name}</p>
 								<br />
 								<p>{note[0].content}</p>
 								<br />
-								Date Modified: {note[0].modified}
+								Date Modified: {note[0].date_mod}
 							</li>
 							<Link to='/'>
 								<button

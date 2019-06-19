@@ -15,7 +15,7 @@ class Folders extends Component {
 							context.state.folders.map((f, i) => {
 								return (
 									<Link to={`/folders/${f.id}`} key={f.id}>
-										<li key={f.id}>{f.name}</li>
+										<li key={f.id}>{f.folder_name}</li>
 									</Link>
 								);
 							})

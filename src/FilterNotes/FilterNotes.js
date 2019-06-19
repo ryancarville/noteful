@@ -20,10 +20,10 @@ export default class FilterNotes extends Component {
 						return (
 							<div key={i}>
 								<li key={n.id}>
-									<Link to={`/notes/${n.id}`}>{n.name}</Link>
+									<Link to={`/notes/${n.id}`}>{n.note_name}</Link>
 									<br />
 									<br />
-									Date Modified: {n.modified}
+									Date Modified: {n.date_mod}
 								</li>
 								<button
 									type='button'

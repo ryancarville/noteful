@@ -18,11 +18,11 @@ class Notes extends Component {
 										<>
 											<li key={n.id}>
 												<Link to={`/notes/${n.id}`} key={'link' + n.id}>
-													{n.name}
+													{n.note_name}
 												</Link>
 												<br />
 												<br />
-												Date Modified: {n.modified}
+												Date Modified: {n.date_mod}
 											</li>
 											<Link to='/' key={'Btnlink' + i}>
 												<button
