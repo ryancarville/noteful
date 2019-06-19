@@ -5,18 +5,19 @@ import PropTypes from 'prop-types';
 
 export default class FilterNotes extends Component {
 	render() {
+		//folder id for the selected folder
 		const folderId = this.props.folderId;
-		console.log(folderId);
+
 		return (
 			<MyContext.Consumer>
 				{context => {
+					//vaiable for all notes in context state
 					const notes = context.state.notes;
-					console.log(notes);
-
+					//filter the notes in the context state that are in the selected folder
 					const notesFiltered = notes.filter(
 						note => note.folder_id == folderId
 					);
-					console.log(notesFiltered);
+
 					return notesFiltered.map((n, i) => {
 						return (
 							<div key={i}>

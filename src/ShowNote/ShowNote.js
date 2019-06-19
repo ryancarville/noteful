@@ -5,7 +5,6 @@ import DisplayNotes from '../DisplayNotes/DisplayNotes';
 class ShowNote extends Component {
 	render() {
 		const noteId = this.props.match.params.note_id;
-		console.log(noteId);
 		return (
 			<div className='stageWrap'>
 				<div className='mainPage'>

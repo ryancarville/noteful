@@ -2,27 +2,28 @@ import React, { Component } from 'react';
 
 export const MyContext = React.createContext();
 class MyProvider extends Component {
+	//shared state
 	constructor(props) {
 		super(props);
 		this.state = {
 			folders: [],
 			notes: [],
+			//hadnle delete events
 			handelDelete: noteId => {
-				console.log(noteId);
 				const options = {
 					method: 'DELETE',
 					headers: {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(`http://localhost:8000/api/notes/` + noteId, options).then(
-					note => {
-						console.log(note);
-						this.callAPIs();
-					}
-				);
+				fetch(
+					`https://stormy-badlands-14920.herokuapp.com/api/notes/` + noteId,
+					options
+				).then(note => {
+					this.callAPIs();
+				});
 			},
-
+			//handle adding of new folders
 			AddFolder: folderInfo => {
 				const options = {
 					method: 'POST',
@@ -31,11 +32,14 @@ class MyProvider extends Component {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(`http://localhost:8000/api/folders`, options).then(folderInfo => {
-					console.log(folderInfo);
+				fetch(
+					`https://stormy-badlands-14920.herokuapp.com/api/folders`,
+					options
+				).then(folderInfo => {
 					this.callAPIs();
 				});
 			},
+			//handle the adding of new notes
 			AddNote: noteInfo => {
 				const options = {
 					method: 'POST',
@@ -44,18 +48,20 @@ class MyProvider extends Component {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(`http://localhost:8000/api/notes/`, options).then(noteInfo => {
-					console.log(noteInfo);
+				fetch(
+					`https://stormy-badlands-14920.herokuapp.com/api/notes/`,
+					options
+				).then(noteInfo => {
 					this.callAPIs();
 				});
 			}
 		};
-
-		console.log(this.state);
 	}
 
+	//main api fetch to server for data
 	async callAPIs() {
-		const api_endpoint = 'http://localhost:8000/api';
+		//api endpoint
+		const api_endpoint = 'https://stormy-badlands-14920.herokuapp.com/api';
 		//get folders and notes
 		await Promise.all([
 			fetch(`${api_endpoint}/notes`),
@@ -73,7 +79,6 @@ class MyProvider extends Component {
 					notes: notes,
 					error: null
 				});
-				console.log(this.state);
 			})
 			.catch(err => {
 				this.setState({
@@ -83,7 +88,6 @@ class MyProvider extends Component {
 	}
 
 	componentDidMount() {
-		console.log('Component Did Mount');
 		this.callAPIs();
 	}
 	render() {

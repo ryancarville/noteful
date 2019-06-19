@@ -5,6 +5,7 @@ import ValidationError from '../ValidationError/ValidationError';
 import PropTypes from 'prop-types';
 
 export default class AddNote extends Component {
+	//state to hold new note data
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -22,6 +23,7 @@ export default class AddNote extends Component {
 		};
 	}
 
+	//set this state for note name
 	createNoteName(noteName) {
 		this.setState(
 			{
@@ -33,6 +35,7 @@ export default class AddNote extends Component {
 		);
 	}
 
+	//set this state for date modifed
 	createNoteModified() {
 		let dateMod = new Date();
 		let date =
@@ -51,12 +54,14 @@ export default class AddNote extends Component {
 		this.setState({ date_mod: date });
 	}
 
+	//set this state for folder id
 	createNoteFolderId(noteFolderId) {
 		this.setState({
 			folder_id: noteFolderId
 		});
 	}
 
+	//set this state for note content
 	createNoteContent(noteContent) {
 		this.setState(
 			{
@@ -68,7 +73,7 @@ export default class AddNote extends Component {
 		);
 	}
 
-	//validation
+	//note name validation
 	validateName(fieldValue) {
 		const fieldErrors = { ...this.state.validationMessages };
 		let hasError = false;
@@ -96,6 +101,7 @@ export default class AddNote extends Component {
 		);
 	}
 
+	//note content validation
 	validateContent(fieldValue) {
 		const fieldErrors = { ...this.state.validationMessages };
 		let hasError = false;
@@ -123,6 +129,7 @@ export default class AddNote extends Component {
 		);
 	}
 
+	//form validation
 	formValid() {
 		this.setState({
 			formValid: this.state.nameValid && this.state.contentValid
@@ -130,6 +137,7 @@ export default class AddNote extends Component {
 	}
 
 	render() {
+		//variable new note data to be sent to context
 		const noteInfo = {
 			note_name: this.state.note_name,
 			date_mod: this.state.date_mod,

@@ -5,6 +5,7 @@ import './AddFolder.css';
 import PropTypes from 'prop-types';
 
 export default class AddFolder extends Component {
+	//add folder state to hold new folder settings
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -15,7 +16,7 @@ export default class AddFolder extends Component {
 			}
 		};
 	}
-
+	//set this state for folder name
 	createFolderName(folderName) {
 		this.setState(
 			{
@@ -27,9 +28,7 @@ export default class AddFolder extends Component {
 		);
 	}
 
-	//validation
-
-	//validation
+	//folder name validation
 	validateName(fieldValue) {
 		const fieldErrors = { ...this.state.validationMessages };
 		let hasError = false;
@@ -57,6 +56,7 @@ export default class AddFolder extends Component {
 		);
 	}
 
+	//form validator
 	formValid() {
 		this.setState({
 			formValid: this.state.nameValid
@@ -64,6 +64,7 @@ export default class AddFolder extends Component {
 	}
 
 	render() {
+		//variable for new folder to be sent to context
 		const folderInfo = { folder_name: this.state.name };
 		return (
 			<div className='addFolderWrap'>

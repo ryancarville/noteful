@@ -4,7 +4,6 @@ import './Notes.css';
 import { MyContext } from '../MyProvider';
 import PropTypes from 'prop-types';
 
-console.log('Notes ran');
 class Notes extends Component {
 	render() {
 		return (

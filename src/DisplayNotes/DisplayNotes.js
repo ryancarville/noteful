@@ -5,14 +5,13 @@ import PropTypes from 'prop-types';
 
 export default class DisplayNotes extends Component {
 	render() {
+		//note id
 		const noteId = this.props.noteId;
-		console.log(noteId);
 		return (
 			<MyContext.Consumer>
 				{context => {
-					console.log(context.state.notes);
 					const note = context.state.notes.filter(note => note.id == noteId);
-					console.log(note);
+
 					return (
 						<>
 							<li key={note.id}>

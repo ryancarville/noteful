@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './Folders.css';
 import PropTypes from 'prop-types';
 
-console.log('Folders ran');
 class Folders extends Component {
 	render() {
 		return (

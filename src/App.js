@@ -10,7 +10,6 @@ import Folders from './Folders/Folders';
 import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
 
-console.log('App ran');
 class App extends Component {
 	render() {
 		return (

@@ -5,7 +5,6 @@ import MyProvider from './MyProvider';
 import './index.css';
 import App from './App';
 
-console.log('Index ran');
 ReactDOM.render(
 	<MyProvider>
 		<BrowserRouter>
