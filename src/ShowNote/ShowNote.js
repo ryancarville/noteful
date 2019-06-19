@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-
 import '../Notes/Notes.css';
-
 import DisplayNotes from '../DisplayNotes/DisplayNotes';
 
-console.log('ShowNote ran');
 class ShowNote extends Component {
 	render() {
-		const noteId = window.location.pathname.substring(7);
+		const noteId = this.props.match.params.note_id;
 		console.log(noteId);
 		return (
 			<div className='stageWrap'>

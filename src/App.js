@@ -27,7 +27,7 @@ class App extends Component {
 
 						<Route path={`/folders`} component={NotesInFolder} />
 
-						<Route path={`/notes`} component={ShowNote} />
+						<Route path='/notes/:note_id' exact component={ShowNote} />
 
 						<Route path={`/addFolder`} component={AddFolder} />
 
