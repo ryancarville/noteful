@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import config from './config';
 export const MyContext = React.createContext();
 class MyProvider extends Component {
 	//shared state
@@ -16,10 +16,7 @@ class MyProvider extends Component {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(
-					`https://stormy-badlands-14920.herokuapp.com/api/notes/` + noteId,
-					options
-				).then(note => {
+				fetch(`${config.API_ENDPOINT}/notes/` + noteId, options).then(note => {
 					this.callAPIs();
 				});
 			},
@@ -32,10 +29,7 @@ class MyProvider extends Component {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(
-					`https://stormy-badlands-14920.herokuapp.com/api/folders`,
-					options
-				).then(folderInfo => {
+				fetch(`${config.API_ENDPOINT}/folders`, options).then(folderInfo => {
 					this.callAPIs();
 				});
 			},
@@ -48,10 +42,7 @@ class MyProvider extends Component {
 						'content-type': 'application/json'
 					}
 				};
-				fetch(
-					`https://stormy-badlands-14920.herokuapp.com/api/notes/`,
-					options
-				).then(noteInfo => {
+				fetch(`${config.API_ENDPOINT}/notes/`, options).then(noteInfo => {
 					this.callAPIs();
 				});
 			}
@@ -60,12 +51,10 @@ class MyProvider extends Component {
 
 	//main api fetch to server for data
 	async callAPIs() {
-		//api endpoint
-		const api_endpoint = 'https://stormy-badlands-14920.herokuapp.com/api';
 		//get folders and notes
 		await Promise.all([
-			fetch(`${api_endpoint}/notes`),
-			fetch(`${api_endpoint}/folders`)
+			fetch(`${config.API_ENDPOINT}/notes`),
+			fetch(`${config.API_ENDPOINT}/folders`)
 		])
 			.then(([notesRes, foldersRes]) => {
 				if (!notesRes.ok) return notesRes.json().then(e => Promise.reject(e));
